@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Eman</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #ff6b9d;
+            --secondary-color: #a65af1;
+            --text-color: #333;
+            --light-color: #fff;
+            --accent-color: #ffd0e0;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f9f9f9, #f0f0f0);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: var(--text-color);
+        }
+        
+        .fancy-text {
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .card-container {
+            perspective: 2000px;
+            width: 100%;
+            max-width: 900px;
+        }
+        
+        .card {
+            transform-style: preserve-3d;
+            transition: all 1s ease;
+            min-height: 500px;
+        }
+        
+        .card-front, .card-inside {
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .card-front {
+            background: linear-gradient(to right bottom, var(--primary-color), var(--secondary-color));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: rotateY(0deg);
+            z-index: 2;
+        }
+        
+        .card-inside {
+            background: var(--light-color);
+            transform: rotateY(180deg);
+            z-index: 1;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+        
+        .open-card .card {
+            transform: rotateY(180deg);
+        }
+        
+        .card-cover {
+            cursor: pointer;
+        }
+        
+        .float-element {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .heart {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+        
+        .show-section {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .btn-heart {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-heart:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.4);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center p-4 md:p-6">
+    <div id="particles-js"></div>
+    
+    <div class="card-container my-8">
+        <div class="card relative">
+            <!-- Card Front (Cover) -->
+            <div class="card-front p-8 card-cover">
+                <div class="text-center">
+                    <i class="fas fa-birthday-cake text-white text-5xl mb-6 float-element"></i>
+                    <h1 class="fancy-text text-4xl md:text-6xl text-white mb-4">Happy Birthday</h1>
+                    <h2 class="fancy-text text-3xl md:text-5xl text-white mb-8">Eman</h2>
+                    <div class="heart text-white mb-8">
+                        <i class="fas fa-heart text-4xl"></i>
+                    </div>
+                    <p class="text-white text-lg md:text-xl mb-8">15th May</p>
+                    <div class="mt-8 animate-bounce">
+                        <p class="text-white text-md">Click to open</p>
+                        <i class="fas fa-angle-double-down text-white text-xl mt-2"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card Inside (Content) -->
+            <div class="card-inside">
+                <div class="py-8">
+                    <!-- Greeting Section -->
+                    <div class="section mb-12 text-center" id="greeting">
+                        <h2 class="fancy-text text-4xl text-pink-500 mb-6">Dear Eman,</h2>
+                        <p class="text-lg mb-4">On this special day, I wanted to create something unique just for you.</p>
+                        <p class="text-lg">As you celebrate another year of life, I hope this little website brings a smile to your face.</p>
+                    </div>
+                    
+                    <!-- Birthday Wishes Section -->
+                    <div class="section mb-12" id="birthday">
+                        <h3 class="fancy-text text-3xl text-center text-purple-500 mb-6">Birthday Wishes</h3>
+                        <div class="bg-pink-50 p-6 rounded-lg shadow-sm">
+                            <p class="mb-4">May this day be as beautiful and special as you are. You deserve all the happiness, love, and success in the world.</p>
+                            <p class="mb-4">I hope your day is filled with laughter, joy, and surrounded by the people who love and appreciate you.</p>
+                            <p>Wishing you a year ahead full of wonderful surprises, achievements, and memorable moments.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Apology Section -->
+                    <div class="section mb-12" id="apology">
+                        <h3 class="fancy-text text-3xl text-center text-purple-500 mb-6">From My Heart to Yours</h3>
+                        <div class="bg-purple-50 p-6 rounded-lg shadow-sm">
+                            <p class="mb-4">I wanted to take this opportunity to apologize for the times I've hurt you or let you down. The mistakes I've made have taught me valuable lessons about appreciation and caring.</p>
+                            <p class="mb-4">You've always been someone special to me, and I deeply regret any pain I've caused.</p>
+                            <p>On your birthday, I want you to know that I cherish the memories we've shared and wish nothing but the best for you, always.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Video Section -->
+                    <div class="section mb-8" id="video">
+                        <h3 class="fancy-text text-3xl text-center text-purple-500 mb-6">A Special Message</h3>
+                        <div class="bg-gray-100 p-4 rounded-lg flex justify-center">
+                            <div class="w-full max-w-3xl">
+                                <div class="aspect-w-16 aspect-h-9 bg-black rounded-lg flex items-center justify-center">
+                                    <!-- Video will be added here -->
+                                    <video controls playsinline webkit-playsinline class="w-full h-auto rounded-lg" poster="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/svgs/regular/heart.svg">
+                                        <source src="" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <p class="text-center text-sm text-gray-500 mt-2">A special message just for you</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Final Message -->
+                    <div class="section text-center mt-12" id="final">
+                        <p class="text-lg mb-6">Happy Birthday once again, Eman!</p>
+                        <p class="fancy-text text-2xl text-pink-500 mb-8">May all your wishes come true</p>
+                        <button class="btn-heart bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-full shadow-lg">
+                            <i class="fas fa-heart mr-2"></i> With Love
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize particles.js
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 50,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": ["#ff6b9d", "#a65af1", "#ffd0e0"]
+                    },
+                    "shape": {
+                        "type": ["circle", "triangle", "star"],
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true
+                    },
+                    "size": {
+                        "value": 5,
+                        "random": true
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "bubble"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "repulse"
+                        },
+                        "resize": true
+                    }
+                },
+                "retina_detect": true
+            });
+            
+            // Card opening animation
+            const cardCover = document.querySelector('.card-cover');
+            const cardContainer = document.querySelector('.card-container');
+            
+            cardCover.addEventListener('click', function() {
+                cardContainer.classList.add('open-card');
+                setTimeout(revealSections, 1200);
+            });
+            
+            // Button animation
+            const heartBtn = document.querySelector('.btn-heart');
+            heartBtn.addEventListener('click', function() {
+                animateHearts();
+            });
+            
+            // Reveal sections gradually
+            function revealSections() {
+                const sections = document.querySelectorAll('.section');
+                sections.forEach((section, index) => {
+                    setTimeout(() => {
+                        section.classList.add('show-section');
+                    }, index * 300);
+                });
+            }
+            
+            // Create floating hearts animation
+            function animateHearts() {
+                for (let i = 0; i < 15; i++) {
+                    createHeart();
+                }
+            }
+            
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.innerHTML = '<i class="fas fa-heart"></i>';
+                heart.classList.add('text-pink-500', 'text-2xl', 'absolute');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '80vh';
+                heart.style.position = 'fixed';
+                heart.style.zIndex = '9999';
+                heart.style.opacity = Math.random() * 0.7 + 0.3;
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                document.body.appendChild(heart);
+                
+                const duration = Math.random() * 3 + 2;
+                const heartAnimation = gsap.to(heart, {
+                    y: -window.innerHeight,
+                    x: Math.random() * 100 - 50,
+                    rotation: Math.random() * 360,
+                    duration: duration,
+                    ease: "power1.out",
+                    onComplete: function() {
+                        heart.remove();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
