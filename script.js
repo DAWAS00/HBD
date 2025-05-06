@@ -138,22 +138,68 @@ document.addEventListener('DOMContentLoaded', function() {
     // YouTube player variable
     let player;
     
+    // Add this to your script.js file
+    
+    // Fallback audio using Howler.js
+    let fallbackAudio = null;
+    
     // Initialize YouTube player
     function onYouTubeIframeAPIReady() {
-        player = new YT.Player('youtubePlayer', {
-            height: '0',
-            width: '0',
-            videoId: 'dQw4w9WgXcQ', // Replace with your YouTube video ID
-            playerVars: {
-                'autoplay': 0,
-                'controls': 0,
-            },
-            events: {
-                'onStateChange': onPlayerStateChange
-            }
-        });
+        try {
+            player = new YT.Player('youtubePlayer', {
+                height: '0',
+                width: '0',
+                videoId: '2Oy-_7M9Rbg', // Updated to your new video ID
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange,
+                    'onError': onPlayerError
+                }
+            });
+        } catch (error) {
+            console.error("YouTube player initialization error:", error);
+            initializeFallbackAudio();
+        }
     }
-
+    
+    // Handle YouTube player errors
+    function onPlayerError(event) {
+        console.error("YouTube player error:", event.data);
+        initializeFallbackAudio();
+    }
+    
+    // Initialize fallback audio
+    function initializeFallbackAudio() {
+        console.log("Initializing fallback audio...");
+        fallbackAudio = new Howl({
+            src: ['https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'], // Replace with your fallback audio URL
+            html5: true,
+            volume: 0.7
+        });
+        
+        // Update play/pause buttons to use fallback audio
+        const playBtn = document.getElementById('playBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        
+        if (playBtn && pauseBtn) {
+            playBtn.addEventListener('click', function() {
+                fallbackAudio.play();
+                showPauseButton();
+            });
+            
+            pauseBtn.addEventListener('click', function() {
+                fallbackAudio.pause();
+                showPlayButton();
+            });
+        }
+        
+        document.querySelector('.audio-title').textContent = "Birthday Song (Fallback)";
+    }
+    
     // Handle player state changes
     function onPlayerStateChange(event) {
         if (event.data === YT.PlayerState.ENDED) {
@@ -175,17 +221,59 @@ document.addEventListener('DOMContentLoaded', function() {
         pauseBtn.classList.remove('hidden');
     }
 
-    playBtn.addEventListener('click', () => {
-        player.playVideo();
-        showPauseButton();
-        showMessage("🎵 Music playing...", 1500);
-    });
+    // Enable buttons when player is ready
+    function onPlayerReady(event) {
+        console.log("YouTube player is ready");
+        
+        // Now that player is ready, add event listeners
+        playBtn.addEventListener('click', () => {
+            if (player && typeof player.playVideo === 'function') {
+                player.playVideo();
+                showPauseButton();
+                showMessage("🎵 Music playing...", 1500);
+            } else {
+                console.error("Player or playVideo method is not available");
+                // Try fallback audio if available
+                if (fallbackAudio) {
+                    fallbackAudio.play();
+                    showPauseButton();
+                    showMessage("🎵 Music playing (fallback)...", 1500);
+                }
+            }
+        });
 
-    pauseBtn.addEventListener('click', () => {
-        player.pauseVideo();
-        showPlayButton();
-        showMessage("Music paused", 1500);
-    });
+        pauseBtn.addEventListener('click', () => {
+            if (player && typeof player.pauseVideo === 'function') {
+                player.pauseVideo();
+                showPlayButton();
+            } else {
+                console.error("Player or pauseVideo method is not available");
+                // Try fallback audio if available
+                if (fallbackAudio) {
+                    fallbackAudio.pause();
+                    showPlayButton();
+                }
+            }
+        });
+        
+        // Enable buttons
+        playBtn.disabled = false;
+        pauseBtn.disabled = false;
+    }
+
+    // Remove these event listeners from here since we're adding them in onPlayerReady
+    // playBtn.addEventListener('click', () => {
+    //     player.playVideo();
+    //     showPauseButton();
+    //     showMessage("🎵 Music playing...", 1500);
+    // });
+
+    // pauseBtn.addEventListener('click', () => {
+    //     player.pauseVideo();
+    //     showPlayButton();
+    // });
+
+    showMessage("Music paused", 1500);
     
     // Enhanced Card opening animation
     const cardCover = document.querySelector('.card-cover');
