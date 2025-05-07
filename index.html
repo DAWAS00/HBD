@@ -98,7 +98,7 @@
                             </div>
                             <div class="countdown-item">
                                 <span class="countdown-number" id="minutes">00</span>
-                                <span class="countdown-label">Minutes</span>
+                                <span class="countdown-label">Minutes</span>//
                             </div>
                             <div class="countdown-item">
                                 <span class="countdown-number" id="seconds">00</span>
@@ -125,20 +125,16 @@
                                     <i class="fas fa-gift text-white text-2xl"></i>
                                 </div>
                             </div>
-                            <div class="coffee-cup-3d">
-                                <div class="cup-body-3d">
-                                    <div class="coffee-3d"></div>
-                                    <div class="steam-3d">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                    <div class="coffee-decoration">
-                                        <div class="coffee-heart"></div>
-                                    </div>
+                            <div class="animated-coffee-icon">
+                                <i class="fas fa-coffee"></i>
+                                <div class="coffee-steam">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
                                 </div>
-                                <div class="cup-handle-3d"></div>
-                                <div class="cup-saucer"></div>
+                                <div class="coffee-heart">
+                                    <i class="fas fa-heart"></i>
+                                </div>
                             </div>
                         </div>
                         <p class="coffee-text mt-4 text-lg text-pink-600 font-semibold">Would you join me for coffee? ☕</p>
@@ -247,8 +243,8 @@
     
     <!-- Enhanced Audio Player -->
     <div class="audio-player">
-        <button id="playBtn"><i class="fas fa-play"></i></button>
-        <button id="pauseBtn" class="hidden"><i class="fas fa-pause"></i></button>
+        <button id="playBtn" disabled><i class="fas fa-play"></i></button>
+        <button id="pauseBtn" class="hidden" disabled><i class="fas fa-pause"></i></button>
         <span class="audio-title">Birthday Song</span>
     </div>
     <!-- Add this hidden YouTube player -->
@@ -261,6 +257,6 @@
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="script.js"></script>
     
-    </script>
+
 </body>
 </html>
