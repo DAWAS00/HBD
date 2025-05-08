@@ -56,26 +56,4 @@
   <img src="https://media.giphy.com/media/l46CySTsO9JqWL8di/giphy.gif" width="100%" height="20" />
 </div>
 
-<!-- Cute cake animation -->
-<div align="center">
-  <pre>
-  
-      ,,,,,
-     _|||||_
-    {~*~*~*~}
-    {*~*~*~*}
-  {~*~*~*~*~*~}
-  \==========/
-   \_______/
-  
-  </pre>
-</div>
 
-<!-- Floating balloons -->
-<div align="right">
-  <img src="https://media.giphy.com/media/3o7abGQa0aRJUurpII/giphy.gif" width="80" />
-</div>
-
-<div align="left">
-  <img src="https://media.giphy.com/media/26BRtW4zppWWjrsPu/giphy.gif" width="80" />
-</div>
